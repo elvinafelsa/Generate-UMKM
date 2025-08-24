@@ -1,62 +1,241 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flyer Prompt UMKM - Vina Creative Studio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Generator Prompt & Copywriting Flyer UMKM</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-black text-white min-h-screen flex items-center justify-center p-4">
-  <div class="w-full max-w-lg bg-gray-900 rounded-2xl p-6 shadow-lg">
-    <h1 class="text-2xl font-bold text-center mb-4">Flyer Prompt UMKM</h1>
-    <form id="promptForm" class="space-y-4">
-      <input type="text" id="brand" placeholder="Nama Brand / Produk" class="w-full p-2 rounded bg-gray-800 text-white">
-      <input type="text" id="deal" placeholder="Promo / Harga" class="w-full p-2 rounded bg-gray-800 text-white">
-      <input type="text" id="usp" placeholder="Keunggulan Utama" class="w-full p-2 rounded bg-gray-800 text-white">
-      <input type="text" id="desc" placeholder="Deskripsi Produk" class="w-full p-2 rounded bg-gray-800 text-white">
-      <input type="text" id="color" placeholder="Warna Tema (contoh: gradasi ungu pink)" class="w-full p-2 rounded bg-gray-800 text-white">
-      <select id="tone" class="w-full p-2 rounded bg-gray-800 text-white">
-        <option value="">Pilih Tone</option>
-        <option value="modern fun">Modern Fun</option>
-        <option value="elegan minimalis">Elegan Minimalis</option>
-        <option value="ramai meriah">Ramai Meriah</option>
-      </select>
-      <textarea id="manual" placeholder="Copywriting manual (opsional)" class="w-full p-2 rounded bg-gray-800 text-white"></textarea>
-      <button type="button" id="generateBtn" class="w-full bg-pink-600 hover:bg-pink-700 p-2 rounded">Generate Prompt</button>
-    </form>
+<body class="bg-gray-900 text-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-3xl bg-[#0b1220] rounded-2xl shadow-xl overflow-hidden">
+    <header class="px-6 py-5 border-b border-gray-800">
+      <h1 class="text-2xl font-semibold">Generator Prompt Flyer — UMKM Makanan & Minuman</h1>
+      <p class="text-sm text-gray-400 mt-1">Isi form di bawah, tekan <span class="font-medium">Generate</span>. Salin prompt atau copywriting otomatis untuk dipakai di Canva/AI atau caption sosial media.</p>
+    </header>
 
-    <div class="mt-4">
-      <h2 class="text-lg font-bold mb-2">Hasil Prompt:</h2>
-      <textarea id="output" class="w-full p-2 rounded bg-gray-800 text-white h-40"></textarea>
-      <button id="copyBtn" class="w-full mt-2 bg-green-600 hover:bg-green-700 p-2 rounded">Salin Prompt</button>
-    </div>
+    <main class="p-6">
+      <form id="form" class="grid gap-4">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label class="text-sm text-gray-300">Jenis Produk</label>
+            <select id="jenis" class="mt-1 w-full rounded-md bg-gray-800 border border-gray-700 p-2">
+              <option value="Minuman">Minuman</option>
+              <option value="Makanan">Makanan</option>
+              <option value="Snack">Snack</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-sm text-gray-300">Nama Produk</label>
+            <input id="nama" class="mt-1 w-full rounded-md bg-gray-800 border border-gray-700 p-2" placeholder="Es Kopi Susu Vina" />
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label class="text-sm text-gray-300">Harga (Rp)</label>
+            <input id="harga" class="mt-1 w-full rounded-md bg-gray-800 border border-gray-700 p-2" placeholder="22000" inputmode="numeric" />
+          </div>
+          <div>
+            <label class="text-sm text-gray-300">Rasa / Varian</label>
+            <input id="varian" class="mt-1 w-full rounded-md bg-gray-800 border border-gray-700 p-2" placeholder="Gula Aren / Cokelat" />
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm text-gray-300">Target Audience / Suasana</label>
+          <input id="audience" class="mt-1 w-full rounded-md bg-gray-800 border border-gray-700 p-2" placeholder="Pelajar, kafe aesthetic, keluarga, acara" />
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label class="text-sm text-gray-300">Style Visual Flyer</label>
+            <select id="styleVisual" class="mt-1 w-full rounded-md bg-gray-800 border border-gray-700 p-2">
+              <option>Modern minimal</option>
+              <option>Vibrant & playful</option>
+              <option>Rustic / vintage</option>
+              <option>Elegant premium</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-sm text-gray-300">Call-to-action (CTA)</label>
+            <input id="cta" class="mt-1 w-full rounded-md bg-gray-800 border border-gray-700 p-2" placeholder="Order now • WA: 0812xxxx" />
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm text-gray-300">Tambahkan catatan / manual copywriting (opsional)</label>
+          <textarea id="manual" rows="3" class="mt-1 w-full rounded-md bg-gray-800 border border-gray-700 p-2" placeholder="Contoh: Bahan lokal, tanpa pengawet"></textarea>
+        </div>
+
+        <div class="flex gap-2">
+          <button type="button" id="randomize" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md">Isi contoh</button>
+          <button type="button" id="generate" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 rounded-md">Generate</button>
+          <button type="button" id="clear" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-md">Bersihkan</button>
+        </div>
+      </form>
+
+      <section class="mt-6 grid gap-4">
+        <div>
+          <h2 class="text-lg font-medium">Prompt untuk AI (flyer / image generator)</h2>
+          <textarea id="prompt" rows="6" class="mt-2 w-full rounded-md bg-gray-800 border border-gray-700 p-3 font-mono text-sm" readonly></textarea>
+          <div class="flex gap-2 mt-2">
+            <button id="copyPrompt" class="px-3 py-1 bg-blue-600 rounded-md">Salin Prompt</button>
+            <button id="downloadPrompt" class="px-3 py-1 bg-blue-700 rounded-md">Download .txt</button>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-medium">Copywriting otomatis (caption & headline)</h2>
+          <div class="grid gap-2 mt-2">
+            <textarea id="headline" rows="1" class="w-full rounded-md bg-gray-800 border border-gray-700 p-2 font-semibold text-lg" readonly></textarea>
+            <textarea id="captionShort" rows="3" class="w-full rounded-md bg-gray-800 border border-gray-700 p-2" readonly></textarea>
+            <textarea id="captionLong" rows="4" class="w-full rounded-md bg-gray-800 border border-gray-700 p-2" readonly></textarea>
+            <textarea id="ctaText" rows="1" class="w-full rounded-md bg-gray-800 border border-gray-700 p-2" readonly></textarea>
+            <div class="flex gap-2">
+              <button id="copyAllCopy" class="px-3 py-1 bg-amber-600 rounded-md">Salin Semua Copy</button>
+              <button id="copyShort" class="px-3 py-1 bg-amber-500 rounded-md">Salin Caption Pendek</button>
+              <button id="useManual" class="px-3 py-1 bg-gray-600 rounded-md">Gunakan Manual</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="px-6 py-4 border-t border-gray-800 text-xs text-gray-400">
+      Dibuat untuk UMKM • Ganti & sesuaikan bahasa copy sesuai brand. — Vina Creative Studio style
+    </footer>
   </div>
 
   <script>
-    const generateBtn = document.getElementById('generateBtn');
-    const copyBtn = document.getElementById('copyBtn');
-    const output = document.getElementById('output');
+    // Helper: escape
+    function esc(s){ return (s||'').toString().trim(); }
 
-    generateBtn.addEventListener('click', () => {
-      const brand = document.getElementById('brand').value;
-      const deal = document.getElementById('deal').value;
-      const usp = document.getElementById('usp').value;
-      const desc = document.getElementById('desc').value;
-      const color = document.getElementById('color').value;
-      const tone = document.getElementById('tone').value;
-      const manual = document.getElementById('manual').value;
+    // Elements
+    const jenis = document.getElementById('jenis');
+    const nama = document.getElementById('nama');
+    const harga = document.getElementById('harga');
+    const varian = document.getElementById('varian');
+    const audience = document.getElementById('audience');
+    const styleVisual = document.getElementById('styleVisual');
+    const cta = document.getElementById('cta');
+    const manual = document.getElementById('manual');
 
-      let prompt = manual.trim() ? manual : 
-      `Buatkan desain flyer UMKM untuk brand ${brand}, promo ${deal}, keunggulan ${usp}, deskripsi: ${desc}. Warna tema: ${color}, tone: ${tone}. Gaya modern estetik, menarik dan sesuai target pasar.`;
+    const promptEl = document.getElementById('prompt');
+    const headlineEl = document.getElementById('headline');
+    const captionShortEl = document.getElementById('captionShort');
+    const captionLongEl = document.getElementById('captionLong');
+    const ctaTextEl = document.getElementById('ctaText');
 
-      output.value = prompt;
+    // Generate function
+    function generate() {
+      const data = {
+        jenis: esc(jenis.value) || 'Minuman',
+        nama: esc(nama.value) || 'Produk Lezat',
+        harga: esc(harga.value) || '0',
+        varian: esc(varian.value) || 'Original',
+        audience: esc(audience.value) || 'Umum',
+        style: esc(styleVisual.value) || 'Modern minimal',
+        cta: esc(cta.value) || 'Order sekarang',
+        manual: esc(manual.value)
+      };
+
+      // IMAGE PROMPT (to feed to image AI / designer)
+      const imagePrompt = [
+        `${data.jenis} product photography / flyer layout: "${data.nama}" (${data.varian})`,
+        `style: ${data.style}, target audience: ${data.audience}, mood: appetizing, inviting, high-resolution`,
+        `composition: product close-up, clear price tag Rp ${data.harga}, legible text area for CTA`,
+        `colors: warm tones if makanan, pastel/earthy if minuman; include logo placeholder top-left`,
+        `elements: large product photo, price badge, short headline, CTA button area, contact info`,
+        data.manual ? `notes: ${data.manual}` : ''
+      ].filter(Boolean).join(' | ');
+
+      // COPYWRITING variations
+      const headline = `${data.nama} • Hanya Rp ${formatPrice(data.harga)}`;
+      const captionShort = `${headline}\n${data.varian} — Nikmati sekarang. ${data.cta}`;
+      const captionLong = `Kenapa pilih ${data.nama}? Karena ${data.varian} kami dibuat dari bahan berkualitas, cocok untuk ${data.audience}. Harganya cuma Rp ${formatPrice(data.harga)}. ${data.cta} 🎉\n\n${data.manual ? 'Info: ' + data.manual : ''}`;
+      const ctaText = `${data.cta} • WA: masukkan nomor / link`;
+
+      // Fill UI
+      promptEl.value = imagePrompt;
+      headlineEl.value = headline;
+      captionShortEl.value = captionShort;
+      captionLongEl.value = captionLong;
+      ctaTextEl.value = ctaText;
+    }
+
+    // Format price helper
+    function formatPrice(p){ 
+      try{
+        const n = Number(String(p).replace(/[^\d]/g,'')) || 0;
+        return n.toLocaleString('id-ID');
+      }catch(e){ return p; }
+    }
+
+    // Copy helpers
+    async function copyText(text){
+      try {
+        await navigator.clipboard.writeText(text);
+        toast('Disalin ke clipboard');
+      } catch(e) {
+        alert('Gagal menyalin. Izin clipboard ditolak.');
+      }
+    }
+
+    // Simple toast
+    function toast(msg){
+      const t = document.createElement('div');
+      t.textContent = msg;
+      Object.assign(t.style,{position:'fixed',right:'20px',bottom:'20px',background:'#0f1724',color:'#fff',padding:'8px 12px',borderRadius:'8px',boxShadow:'0 4px 20px rgba(0,0,0,0.6)'});
+      document.body.appendChild(t);
+      setTimeout(()=> t.remove(),1800);
+    }
+
+    // Buttons
+    document.getElementById('generate').addEventListener('click', generate);
+    document.getElementById('randomize').addEventListener('click', ()=>{
+      // contoh isi cepat
+      jenis.value = 'Minuman';
+      nama.value = 'Es Kopi Gula Aren Vina';
+      harga.value = '22000';
+      varian.value = 'Gula Aren, Susu Kental';
+      audience.value = 'Pelajar & Milenial, pengunjung kafe';
+      styleVisual.value = 'Vibrant & playful';
+      cta.value = 'Pesan via WA • 081234567890';
+      manual.value = 'Bahan lokal, bebas pengawet, promosi buy 1 get 1 weekdays';
+      generate();
     });
 
-    copyBtn.addEventListener('click', () => {
-      output.select();
-      document.execCommand('copy');
-      alert('Prompt berhasil disalin!');
+    document.getElementById('clear').addEventListener('click', ()=>{
+      document.getElementById('form').reset();
+      promptEl.value = headlineEl.value = captionShortEl.value = captionLongEl.value = ctaTextEl.value = '';
     });
+
+    document.getElementById('copyPrompt').addEventListener('click', ()=> copyText(promptEl.value));
+    document.getElementById('downloadPrompt').addEventListener('click', ()=>{
+      const blob = new Blob([promptEl.value || ''], {type: 'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `${(nama.value||'prompt').replace(/\s+/g,'_')}_prompt.txt`;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('copyAllCopy').addEventListener('click', ()=> {
+      const all = [headlineEl.value, captionShortEl.value, captionLongEl.value, ctaTextEl.value].filter(Boolean).join('\n\n');
+      copyText(all);
+    });
+    document.getElementById('copyShort').addEventListener('click', ()=> copyText(captionShortEl.value));
+    document.getElementById('useManual').addEventListener('click', ()=> {
+      if (manual.value.trim()) {
+        headlineEl.value = manual.value.trim();
+        copyText(manual.value.trim());
+      } else {
+        toast('Tidak ada teks manual.');
+      }
+    });
+
+    // generate on first load with example
+    document.getElementById('randomize').click();
   </script>
 </body>
 </html>
