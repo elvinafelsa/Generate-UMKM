@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flyer Prompt UMKM - Vina Creative Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-lg bg-gray-900 rounded-2xl p-6 shadow-lg">
+    <h1 class="text-2xl font-bold text-center mb-4">Flyer Prompt UMKM</h1>
+    <form id="promptForm" class="space-y-4">
+      <input type="text" id="brand" placeholder="Nama Brand / Produk" class="w-full p-2 rounded bg-gray-800 text-white">
+      <input type="text" id="deal" placeholder="Promo / Harga" class="w-full p-2 rounded bg-gray-800 text-white">
+      <input type="text" id="usp" placeholder="Keunggulan Utama" class="w-full p-2 rounded bg-gray-800 text-white">
+      <input type="text" id="desc" placeholder="Deskripsi Produk" class="w-full p-2 rounded bg-gray-800 text-white">
+      <input type="text" id="color" placeholder="Warna Tema (contoh: gradasi ungu pink)" class="w-full p-2 rounded bg-gray-800 text-white">
+      <select id="tone" class="w-full p-2 rounded bg-gray-800 text-white">
+        <option value="">Pilih Tone</option>
+        <option value="modern fun">Modern Fun</option>
+        <option value="elegan minimalis">Elegan Minimalis</option>
+        <option value="ramai meriah">Ramai Meriah</option>
+      </select>
+      <textarea id="manual" placeholder="Copywriting manual (opsional)" class="w-full p-2 rounded bg-gray-800 text-white"></textarea>
+      <button type="button" id="generateBtn" class="w-full bg-pink-600 hover:bg-pink-700 p-2 rounded">Generate Prompt</button>
+    </form>
+
+    <div class="mt-4">
+      <h2 class="text-lg font-bold mb-2">Hasil Prompt:</h2>
+      <textarea id="output" class="w-full p-2 rounded bg-gray-800 text-white h-40"></textarea>
+      <button id="copyBtn" class="w-full mt-2 bg-green-600 hover:bg-green-700 p-2 rounded">Salin Prompt</button>
+    </div>
+  </div>
+
+  <script>
+    const generateBtn = document.getElementById('generateBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const output = document.getElementById('output');
+
+    generateBtn.addEventListener('click', () => {
+      const brand = document.getElementById('brand').value;
+      const deal = document.getElementById('deal').value;
+      const usp = document.getElementById('usp').value;
+      const desc = document.getElementById('desc').value;
+      const color = document.getElementById('color').value;
+      const tone = document.getElementById('tone').value;
+      const manual = document.getElementById('manual').value;
+
+      let prompt = manual.trim() ? manual : 
+      `Buatkan desain flyer UMKM untuk brand ${brand}, promo ${deal}, keunggulan ${usp}, deskripsi: ${desc}. Warna tema: ${color}, tone: ${tone}. Gaya modern estetik, menarik dan sesuai target pasar.`;
+
+      output.value = prompt;
+    });
+
+    copyBtn.addEventListener('click', () => {
+      output.select();
+      document.execCommand('copy');
+      alert('Prompt berhasil disalin!');
+    });
+  </script>
+</body>
+</html>
